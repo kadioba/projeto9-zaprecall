@@ -3,25 +3,25 @@ import Deck from "./Deck";
 import styled from "styled-components";
 import logo from "../assets/logo.png"
 
-export default function Aplicacao() {
+export default function Aplicacao(props) {
     return (
         <TelaPrincipal>
             <Logo>
                 <img src={logo} alt="" />
                 <h1>ZapRecall</h1>
             </Logo>
-            <Deck />
+            <Deck abrirCard={props.abrirCard} cartoesAbertos={props.cartoesAbertos} />
         </TelaPrincipal>
     )
 }
 
 const TelaPrincipal = styled.div`
-    height: 90vh;
+    height: 100%;
     width: 100vw;
-    background-color: #FB6B6B;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 10vh;
 `
 
 const Logo = styled.div`

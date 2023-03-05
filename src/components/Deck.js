@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import Card from "./Card"
 
-export default function Deck() {
+export default function Deck(props) {
     const cards = [
         { question: "O que é JSX?", answer: "Uma extensão da linguagem JavaScript" },
         { question: "O React é __", answer: "Uma biblioteca JavaScript para construção de interfaces" },
@@ -15,7 +15,7 @@ export default function Deck() {
 
     return (
         <Container>
-            <Card />
+            {cards.map((carta, index) => <Card cartoesAbertos={props.cartoesAbertos} abrirCard={props.abrirCard} carta={carta} pergunta={carta.question} resposta={carta.question} indice={index} />)}
         </Container>
     )
 }

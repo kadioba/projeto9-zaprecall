@@ -2,20 +2,24 @@ import styled from "styled-components"
 import setaPlay from "../assets/seta_play.png"
 import setaVirar from "../assets/seta_virar.png"
 
-export default function Card() {
+export default function Card(props) {
+
+
+    const perguntaNoEstado = props.cartoesAbertos.find((o) => o.question === props.pergunta);
+    console.log(perguntaNoEstado)
+
     return (
         <Cartao>
             <CartaoFechado>
-                <h1>Perguntaa 2</h1>
-                <img src={setaPlay} alt="" />
+                <h1>Perguntaa {props.indice + 1}</h1>
+                <img src={setaPlay} alt="" onClick={() => props.abrirCard(props.carta)} />
             </CartaoFechado>
-            <Pergunta>
-                <h1>O que é JSX?</h1>
+            <Pergunta perguntaNoEstado={perguntaNoEstado} >
+                <h1>{props.pergunta}</h1>
                 <img src={setaVirar} alt="" />
             </Pergunta>
             <Resposta>
-                <h1>JSX é uma sintaxe para
-                    escrever HTML dentro do JS</h1>
+                <h1>{props.resposta}</h1>
                 <div>
                     <button>Não lembrei</button>
                     <button>Quase não lembrei</button>
@@ -32,13 +36,14 @@ const Cartao = styled.div`
     box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
     border-radius: 5px;
     padding: 15px;
+    box-sizing: border-box;
+    margin-bottom: 25px;
 `
 
 const CartaoFechado = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    display: none;
     h1{
         font-family: 'Recursive';
         font-weight: 700;
@@ -52,10 +57,9 @@ const CartaoFechado = styled.div`
 `
 
 const Pergunta = styled.div`
-    display: flex;
+    display: ${props => props.perguntaNoEstado ? "flex" : "none"}; 
     flex-direction: column;
     justify-content: flex-start;
-    display: none;
     img{
         width: 30px;
         height: 20px;
@@ -72,6 +76,7 @@ const Pergunta = styled.div`
 `
 
 const Resposta = styled.div`
+    display: none;
     h1{
         font-family: 'Recursive';
         font-weight: 400;
