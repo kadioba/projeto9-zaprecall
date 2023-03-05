@@ -11,8 +11,8 @@ export default function Card(props) {
 
 
     return (
-        <Cartao>
-            <CartaoFechado>
+        <Cartao perguntaAberta={perguntaAberta} respostaAberta={respostaAberta}>
+            <CartaoFechado perguntaAberta={perguntaAberta} respostaAberta={respostaAberta}>
                 <h1>Perguntaa {props.indice + 1}</h1>
                 <img src={setaPlay} alt="" onClick={() => props.abrirCard(props.carta)} />
             </CartaoFechado>
@@ -34,7 +34,7 @@ export default function Card(props) {
 
 const Cartao = styled.div`
     width: 80vw;
-    background-color: #FFFFFF;
+    background-color: ${props => props.perguntaAberta || props.respostaAberta ? "#FFFFD4" : "#FFFFFF"};
     box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
     border-radius: 5px;
     padding: 15px;
@@ -43,7 +43,7 @@ const Cartao = styled.div`
 `
 
 const CartaoFechado = styled.div`
-    display: flex;
+    display: ${props => props.perguntaAberta || props.respostaAberta ? "none" : "flex"};
     justify-content: space-between;
     align-items: center;
     h1{
