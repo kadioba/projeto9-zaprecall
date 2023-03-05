@@ -7,8 +7,7 @@ export default function Card(props) {
 
     const perguntaAberta = props.cartoesAbertos.find((o) => o.question === props.pergunta);
     const respostaAberta = props.respostasAbertas.find((o) => o.question === props.pergunta);
-    console.log(respostaAberta)
-    console.log(respostaAberta)
+
 
 
     return (
@@ -24,9 +23,9 @@ export default function Card(props) {
             <Resposta respostaAberta={respostaAberta}>
                 <h1>{props.resposta}</h1>
                 <div>
-                    <button>Não lembrei</button>
-                    <button>Quase não lembrei</button>
-                    <button>Zap!</button>
+                    <button onClick={() => props.finalizarCard(props.carta, "erro")}>Não lembrei</button>
+                    <button onClick={() => props.finalizarCard(props.carta, "parcial")}>Quase não lembrei</button>
+                    <button onClick={() => props.finalizarCard(props.carta, "acerto")}>Zap!</button>
                 </div>
             </Resposta>
         </Cartao>

@@ -10,7 +10,7 @@ export default function Aplicacao(props) {
                 <img src={logo} alt="" />
                 <h1>ZapRecall</h1>
             </Logo>
-            <Deck abrirCard={props.abrirCard} cartoesAbertos={props.cartoesAbertos} abrirResposta={props.abrirResposta} respostasAbertas={props.respostasAbertas} />
+            <Deck finalizarCard={props.finalizarCard} abrirCard={props.abrirCard} cartoesAbertos={props.cartoesAbertos} abrirResposta={props.abrirResposta} respostasAbertas={props.respostasAbertas} />
         </TelaPrincipal>
     )
 }

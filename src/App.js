@@ -6,9 +6,8 @@ export default function App() {
 
   const [cartoesAbertos, setCartoesAbertos] = React.useState([]);
   const [respostasAbertas, setRespostasAbertas] = React.useState([]);
-  console.log(respostasAbertas)
-
-
+  const [cartoesFinalizados, setCartoesFinalizados] = React.useState([]);
+  console.log(cartoesFinalizados)
 
   function abrirCard(cartao) {
     setCartoesAbertos([...cartoesAbertos, cartao]);
@@ -17,6 +16,13 @@ export default function App() {
   function abrirResposta(cartao) {
     removerObjetoCartoesAbertos(cartao);
     setRespostasAbertas([...respostasAbertas, cartao]);
+  }
+
+  function finalizarCard(cartao, resultado) {
+    removerObjetoRespostasAbertas(cartao)
+    cartao.resultado = resultado;
+    setCartoesFinalizados([...cartoesFinalizados, cartao])
+
   }
 
   function removerObjetoCartoesAbertos(objeto) {
@@ -29,9 +35,19 @@ export default function App() {
     setCartoesAbertos(novoArray);
   }
 
+  function removerObjetoRespostasAbertas(objeto) {
+    const novoArray = [];
+    for (let i = 0; i < respostasAbertas.length; i++) {
+      if (respostasAbertas[i].question != objeto.question) {
+        novoArray.push(respostasAbertas[i]);
+      }
+    }
+    setRespostasAbertas(novoArray);
+  }
+
   return (
     <>
-      <Aplicacao abrirCard={abrirCard} cartoesAbertos={cartoesAbertos} abrirResposta={abrirResposta} respostasAbertas={respostasAbertas} />
+      <Aplicacao finalizarCard={finalizarCard} abrirCard={abrirCard} cartoesAbertos={cartoesAbertos} abrirResposta={abrirResposta} respostasAbertas={respostasAbertas} />
       <Rodape />
     </>
   )
