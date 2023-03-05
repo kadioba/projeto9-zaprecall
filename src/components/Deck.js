@@ -15,7 +15,7 @@ export default function Deck(props) {
 
     return (
         <Container>
-            {cards.map((carta, index) => <Card cartoesAbertos={props.cartoesAbertos} abrirCard={props.abrirCard} carta={carta} pergunta={carta.question} resposta={carta.question} indice={index} />)}
+            {cards.map((carta, index) => <Card respostasAbertas={props.respostasAbertas} abrirResposta={props.abrirResposta} cartoesAbertos={props.cartoesAbertos} abrirCard={props.abrirCard} carta={carta} pergunta={carta.question} resposta={carta.answer} indice={index} />)}
         </Container>
     )
 }

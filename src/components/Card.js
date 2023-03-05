@@ -5,8 +5,11 @@ import setaVirar from "../assets/seta_virar.png"
 export default function Card(props) {
 
 
-    const perguntaNoEstado = props.cartoesAbertos.find((o) => o.question === props.pergunta);
-    console.log(perguntaNoEstado)
+    const perguntaAberta = props.cartoesAbertos.find((o) => o.question === props.pergunta);
+    const respostaAberta = props.respostasAbertas.find((o) => o.question === props.pergunta);
+    console.log(respostaAberta)
+    console.log(respostaAberta)
+
 
     return (
         <Cartao>
@@ -14,11 +17,11 @@ export default function Card(props) {
                 <h1>Perguntaa {props.indice + 1}</h1>
                 <img src={setaPlay} alt="" onClick={() => props.abrirCard(props.carta)} />
             </CartaoFechado>
-            <Pergunta perguntaNoEstado={perguntaNoEstado} >
+            <Pergunta perguntaAberta={perguntaAberta} >
                 <h1>{props.pergunta}</h1>
-                <img src={setaVirar} alt="" />
+                <img src={setaVirar} alt="" onClick={() => props.abrirResposta(props.carta)} />
             </Pergunta>
-            <Resposta>
+            <Resposta respostaAberta={respostaAberta}>
                 <h1>{props.resposta}</h1>
                 <div>
                     <button>Não lembrei</button>
@@ -57,7 +60,7 @@ const CartaoFechado = styled.div`
 `
 
 const Pergunta = styled.div`
-    display: ${props => props.perguntaNoEstado ? "flex" : "none"}; 
+    display: ${props => props.perguntaAberta ? "flex" : "none"}; 
     flex-direction: column;
     justify-content: flex-start;
     img{
@@ -76,7 +79,7 @@ const Pergunta = styled.div`
 `
 
 const Resposta = styled.div`
-    display: none;
+    display: ${props => props.respostaAberta ? "initial" : "none"};
     h1{
         font-family: 'Recursive';
         font-weight: 400;
