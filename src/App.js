@@ -48,7 +48,7 @@ export default function App() {
   return (
     <>
       <Aplicacao cartoesFinalizados={cartoesFinalizados} finalizarCard={finalizarCard} abrirCard={abrirCard} cartoesAbertos={cartoesAbertos} abrirResposta={abrirResposta} respostasAbertas={respostasAbertas} />
-      <Rodape />
+      <Rodape cartoesFinalizados={cartoesFinalizados} />
     </>
   )
 }

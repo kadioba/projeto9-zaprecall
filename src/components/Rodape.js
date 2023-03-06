@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import cards from "../cards";
 
-export default function Rodape() {
+export default function Rodape(props) {
     return (
-        <TelaRodape>
-            <h1>0/4 CONCLUÍDOS</h1>
+        <TelaRodape data-test="footer">
+            <h1>{props.cartoesFinalizados.length}/{cards.length} CONCLUÍDOS</h1>
         </TelaRodape>
     )
 }

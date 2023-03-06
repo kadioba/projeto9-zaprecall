@@ -47,26 +47,45 @@ export default function Card(props) {
         }
     }
 
+    function dataTestIconeCard() {
+        if (perguntaFinalizada) {
+            if (perguntaFinalizada.status === "erro") {
+                return "no-icon"
+            }
+            else if (perguntaFinalizada.status === "parcial") {
+                return "partial-icon"
+            }
+            else if (perguntaFinalizada.status === "acerto") {
+                return "zap-icon"
+            }
+        }
+        else {
+            return "play-btn"
+        }
+    }
+
 
 
     return (
-        <Cartao perguntaAberta={perguntaAberta} respostaAberta={respostaAberta}>
+        <Cartao data-test="flashcard" perguntaAberta={perguntaAberta} respostaAberta={respostaAberta}>
             <CartaoFechado perguntaFinalizada={perguntaFinalizada} corTextoCardFechado={corTextoCardFechado} perguntaAberta={perguntaAberta} respostaAberta={respostaAberta} >
-                <h1>Pergunta {props.indice + 1}</h1>
-                <button onClick={() => props.abrirCard(props.carta)} disabled={perguntaFinalizada ? true : false} >
+                <h1 data-test="flashcard-text">Pergunta {props.indice + 1}</h1>
+                <button data-test={dataTestIconeCard()} onClick={() => props.abrirCard(props.carta)} disabled={perguntaFinalizada ? true : false} >
                     <img src={iconeCard()} alt="" />
                 </button>
             </CartaoFechado>
             <Pergunta perguntaAberta={perguntaAberta} >
-                <h1>{props.pergunta}</h1>
-                <img src={setaVirar} alt="" onClick={() => props.abrirResposta(props.carta)} />
+                <h1 data-test="flashcard-text">{props.pergunta}</h1>
+                <button data-test="turn-btn" onClick={() => props.abrirResposta(props.carta)}>
+                    <img src={setaVirar} alt="" />
+                </button>
             </Pergunta>
             <Resposta respostaAberta={respostaAberta}>
-                <h1>{props.resposta}</h1>
+                <h1 data-test="flashcard-text">{props.resposta}</h1>
                 <div>
-                    <button onClick={() => props.finalizarCard(props.carta, "erro")}>Não lembrei</button>
-                    <button onClick={() => props.finalizarCard(props.carta, "parcial")}>Quase não lembrei</button>
-                    <button onClick={() => props.finalizarCard(props.carta, "acerto")}>Zap!</button>
+                    <button data-test="no-btn" onClick={() => props.finalizarCard(props.carta, "erro")}>Não lembrei</button>
+                    <button data-test="partial-btn" onClick={() => props.finalizarCard(props.carta, "parcial")}>Quase não lembrei</button>
+                    <button data-test="zap-btn" onClick={() => props.finalizarCard(props.carta, "acerto")}>Zap!</button>
                 </div>
             </Resposta>
         </Cartao>
@@ -120,6 +139,10 @@ const Pergunta = styled.div`
         line-height: 22px;
         color: #333333;
         min-height: 87px;
+    }
+    button{
+        background-color: #11ffee00;
+        border: none;
     }
 `
 
