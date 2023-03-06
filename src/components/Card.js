@@ -7,14 +7,35 @@ export default function Card(props) {
 
     const perguntaAberta = props.cartoesAbertos.find((o) => o.question === props.pergunta);
     const respostaAberta = props.respostasAbertas.find((o) => o.question === props.pergunta);
+    const perguntaFinalizada = props.cartoesFinalizados.find((o) => o.question === props.pergunta);
+    console.log(perguntaFinalizada)
+
+    function corTextoCardFechado() {
+        if (perguntaFinalizada) {
+            if (perguntaFinalizada.status === "erro") {
+                return "#FF3030"
+            }
+            else if (perguntaFinalizada.status === "parcial") {
+                return "#FF922E"
+            }
+            else if (perguntaFinalizada.status === "acerto") {
+                return "#2FBE34"
+            }
+        }
+        else {
+            return "#333333"
+        }
+    }
 
 
 
     return (
         <Cartao perguntaAberta={perguntaAberta} respostaAberta={respostaAberta}>
-            <CartaoFechado perguntaAberta={perguntaAberta} respostaAberta={respostaAberta}>
-                <h1>Perguntaa {props.indice + 1}</h1>
-                <img src={setaPlay} alt="" onClick={() => props.abrirCard(props.carta)} />
+            <CartaoFechado perguntaFinalizada={perguntaFinalizada} corTextoCardFechado={corTextoCardFechado} perguntaAberta={perguntaAberta} respostaAberta={respostaAberta} >
+                <h1>Pergunta {props.indice + 1}</h1>
+                <button onClick={() => props.abrirCard(props.carta)} disabled={perguntaFinalizada ? true : false} >
+                    <img src={setaPlay} alt="" />
+                </button>
             </CartaoFechado>
             <Pergunta perguntaAberta={perguntaAberta} >
                 <h1>{props.pergunta}</h1>
@@ -50,7 +71,12 @@ const CartaoFechado = styled.div`
         font-family: 'Recursive';
         font-weight: 700;
         font-size: 16px;
-        color: #333333;
+        color: ${props => props.corTextoCardFechado};
+        text-decoration-line: ${props => props.perguntaFinalizada ? "line-through" : "none"};
+    }
+    button{
+        background-color: #11ffee00;
+        border: none;
     }
     img{
         width: 20px;
@@ -73,7 +99,7 @@ const Pergunta = styled.div`
         font-size: 18px;
         line-height: 22px;
         color: #333333;
-        height: 87px;
+        min-height: 87px;
     }
 `
 
@@ -85,7 +111,7 @@ const Resposta = styled.div`
         font-size: 18px;
         line-height: 22px;
         color: #333333;
-        height: 65px;
+        min-height: 65px;
     }
     div{
         display: flex;

@@ -20,7 +20,7 @@ export default function App() {
 
   function finalizarCard(cartao, resultado) {
     removerObjetoRespostasAbertas(cartao)
-    cartao.resultado = resultado;
+    cartao.status = resultado;
     setCartoesFinalizados([...cartoesFinalizados, cartao])
 
   }
@@ -47,7 +47,7 @@ export default function App() {
 
   return (
     <>
-      <Aplicacao finalizarCard={finalizarCard} abrirCard={abrirCard} cartoesAbertos={cartoesAbertos} abrirResposta={abrirResposta} respostasAbertas={respostasAbertas} />
+      <Aplicacao cartoesFinalizados={cartoesFinalizados} finalizarCard={finalizarCard} abrirCard={abrirCard} cartoesAbertos={cartoesAbertos} abrirResposta={abrirResposta} respostasAbertas={respostasAbertas} />
       <Rodape />
     </>
   )
