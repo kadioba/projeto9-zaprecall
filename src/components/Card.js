@@ -1,6 +1,9 @@
 import styled from "styled-components"
 import setaPlay from "../assets/seta_play.png"
 import setaVirar from "../assets/seta_virar.png"
+import iconeCerto from "../assets/icone_certo.png"
+import iconeQuase from "../assets/icone_quase.png"
+import iconeErro from "../assets/icone_erro.png"
 
 export default function Card(props) {
 
@@ -27,6 +30,23 @@ export default function Card(props) {
         }
     }
 
+    function iconeCard() {
+        if (perguntaFinalizada) {
+            if (perguntaFinalizada.status === "erro") {
+                return iconeErro
+            }
+            else if (perguntaFinalizada.status === "parcial") {
+                return iconeQuase
+            }
+            else if (perguntaFinalizada.status === "acerto") {
+                return iconeCerto
+            }
+        }
+        else {
+            return setaPlay
+        }
+    }
+
 
 
     return (
@@ -34,7 +54,7 @@ export default function Card(props) {
             <CartaoFechado perguntaFinalizada={perguntaFinalizada} corTextoCardFechado={corTextoCardFechado} perguntaAberta={perguntaAberta} respostaAberta={respostaAberta} >
                 <h1>Pergunta {props.indice + 1}</h1>
                 <button onClick={() => props.abrirCard(props.carta)} disabled={perguntaFinalizada ? true : false} >
-                    <img src={setaPlay} alt="" />
+                    <img src={iconeCard()} alt="" />
                 </button>
             </CartaoFechado>
             <Pergunta perguntaAberta={perguntaAberta} >
@@ -79,7 +99,7 @@ const CartaoFechado = styled.div`
         border: none;
     }
     img{
-        width: 20px;
+        width: ${props => props.perguntaFinalizada ? "23px" : "20px"};
         height: 23px;
     }
 `
