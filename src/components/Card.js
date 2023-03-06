@@ -130,7 +130,6 @@ const Pergunta = styled.div`
     img{
         width: 30px;
         height: 20px;
-        align-self: flex-end;
     }
     h1{
         font-family: 'Recursive';
@@ -143,6 +142,7 @@ const Pergunta = styled.div`
     button{
         background-color: #11ffee00;
         border: none;
+        align-self: flex-end;
     }
 `
 

@@ -14,5 +14,4 @@ export default function Deck(props) {
 
 const Container = styled.div`
     width: 80vw;
-    background-color: blue;
 `

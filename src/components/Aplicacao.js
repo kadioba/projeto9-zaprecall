@@ -30,6 +30,8 @@ const Logo = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 42px;
+    margin-bottom: 51px;
     img{
         width: 52px;
         height: 60px;
